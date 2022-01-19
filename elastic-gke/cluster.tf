@@ -1,12 +1,36 @@
 resource "google_container_cluster" "k8s-cluster" {
   name               = "lloyd-k8s-training"
-  location           = "asia-northeast1"
-  initial_node_count = 1
-  project            = "elastic-cloud-dev"
+  location           = "${var.availability_zone}"
   network            = "${google_compute_network.main.name}"
+
+  node_pool {
+    name = "builtin"
+  }
+  lifecycle {
+    ignore_changes = [ node_pool ]
+  }
 }
 
-resource "google_compute_network" "main" {
-  name    = "lloyd-k8s-training"
-  project = "elastic-cloud-dev"
+resource "google_container_node_pool" "ondemand" {
+  name = "ondemand"
+  cluster = google_container_cluster.k8s-cluster.id
+  autoscaling {
+    min_node_count = 0
+    max_node_count = 5
+  }
+  node_config {
+    preemptible = false
+  }
+}
+
+resource "google_container_node_pool" "preemptible" {
+  name = "preemptible"
+  cluster = google_container_cluster.k8s-cluster.id
+  autoscaling {
+    min_node_count = 1
+    max_node_count = 5
+  }
+  node_config {
+    preemptible = true
+  }
 }
