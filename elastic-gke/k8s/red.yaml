@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: red
+spec:
+  selector:
+    matchLabels:
+      app: red
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: red
+    spec:
+      containers:
+      - name: red
+        image: "jpetazzo/color"
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        pool: ondemand

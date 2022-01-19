@@ -1,6 +1,6 @@
 provider "google" {
   project = "${var.project}"
-  zone = "${var.availability_zone}"
+  zone = var.availability_zone
 }
 
 variable "project" {

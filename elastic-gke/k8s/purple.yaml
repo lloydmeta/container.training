@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: purple
+spec:
+  selector:
+    matchLabels:
+      app: purple
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: purple
+    spec:
+      containers:
+      - name: purple
+        image: "jpetazzo/color"
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        pool: preemptible
