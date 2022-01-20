@@ -34,3 +34,4 @@ ehthumbs.db
 ehthumbs_vista.db
 
 .terraform
+.terraform.lock.hcl
