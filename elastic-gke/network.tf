@@ -4,6 +4,7 @@ resource "google_compute_network" "main" {
   auto_create_subnetworks = false
 }
 
+# These appear to be for nodes (?)
 resource "google_compute_subnetwork" "_" {
   name          = var.name
   ip_cidr_range = "10.0.0.0/12"

@@ -1,5 +1,5 @@
 resource "google_container_cluster" "k8s-cluster" {
-  name       = "lloyd-k8s-training"
+  name       = var.name
   location   = var.availability_zone
   network    = google_compute_network.main.name
   subnetwork = google_compute_subnetwork._.name
@@ -7,6 +7,8 @@ resource "google_container_cluster" "k8s-cluster" {
   networking_mode = "VPC_NATIVE"
   ip_allocation_policy {
     # This is the block that will be used for pods.
+    # It seems to be distinct from the cidr range in the
+    # subnetwork declaration
     cluster_ipv4_cidr_block = "10.16.0.0/12"
   }
 
