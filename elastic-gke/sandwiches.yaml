@@ -1,0 +1,25 @@
+---
+kind: Sandwich
+apiVersion: container.training/v1alpha1
+metadata:
+  name: hotdog
+spec:
+  meat: sausage
+  breadType: french
+---
+kind: Sandwich
+apiVersion: container.training/v1alpha1
+metadata:
+  name: jambonbeurre
+spec:
+  meat: ham
+  breadType: baguette
+---
+kind: Sandwich
+apiVersion: container.training/v1alpha1
+metadata:
+  name: grilledcheese
+spec:
+  meat: none
+  cheese: yes
+  breadType: pain-de-mie

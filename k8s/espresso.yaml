@@ -1,0 +1,7 @@
+kind: Coffee
+apiVersion: container.training/v1alpha1
+metadata:
+  name: espresso
+spec:
+  volumn: 10mL
+  strength: 11
